@@ -25,12 +25,12 @@ export default function GardenTile({ position, state, num }: GardenTileProps) {
     plantTexture4,
     finalTexture,
   ] = useLoader(TextureLoader, [
-    "images/seeds.png",
-    "images/tomato_plant_1.png",
-    "images/tomato_plant_2.png",
-    "images/tomato_plant_3.png",
-    "images/tomato_plant_4.png",
-    "images/tomato_plant_final.png",
+    "./images/seeds.png",
+    "./images/tomato_plant_1.png",
+    "./images/tomato_plant_2.png",
+    "./images/tomato_plant_3.png",
+    "./images/tomato_plant_4.png",
+    "./images/tomato_plant_final.png",
   ]);
   seedTexture.magFilter = NearestFilter;
   plantTexture1.magFilter = NearestFilter;

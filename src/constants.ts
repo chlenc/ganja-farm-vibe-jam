@@ -63,7 +63,7 @@ export const TILES = [
   new Vector3(2.47, -2.1, 0),
 ];
 
-export type Modals = "none" | "plant" | "harvest" | "market" | "portal";
+export type Modals = "none" | "plant" | "harvest" | "market" | "exitPortal" | "enterPortal";
 
 export function convertTime(input: BN) {
   const bigNum = convertTaiTime(input.valueOf());

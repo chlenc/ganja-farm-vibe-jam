@@ -42,13 +42,19 @@ const marketBounds = {
   y: 1.7,
 };
 
-const portalBounds = {
+const exitPortalBounds = {
   x1: 4.5,
   x2: 3.9,
   y1: 1.5,
   y2: 0.5,
 };
 
+const enterPortalBounds = {
+  x1: -3.9,
+  x2: -4.5,
+  y1: 1.5,
+  y2: 0.5,
+};
 const playerBounds = {
   left: -2,
   center: 2,
@@ -73,7 +79,10 @@ export default function Player({
   const { ganjaFarmStore } = useStores();
   const tilesHoriz = 4;
   const tilesVert = 5;
-  const tempSpriteMap = useLoader(TextureLoader, "images/bunny_animations.png");
+  const tempSpriteMap = useLoader(
+    TextureLoader,
+    "./images/bunny_animations.png"
+  );
   tempSpriteMap.magFilter = NearestFilter;
   tempSpriteMap.repeat.set(1 / tilesHoriz, 1 / tilesVert);
 
@@ -151,8 +160,10 @@ export default function Player({
 
     const isInGarden = checkIfInGarden();
     const isAtMarket = checkIfAtMarket();
-    const ifAtPortal = checkIfAtPortal();
-    if (!isInGarden && !isAtMarket && !ifAtPortal) {
+    const ifAtExitPortal = checkIfAtExitPortal();
+    const ifAtEnterPortal = checkIfAtEnterPortal();
+    console.log({ ifAtExitPortal, ifAtEnterPortal });
+    if (!isInGarden && !isAtMarket && !ifAtExitPortal && !ifAtEnterPortal) {
       setModal("none");
       isCheckingTilesRef.current = false;
       return;
@@ -183,8 +194,10 @@ export default function Player({
       } catch (err) {
         console.error("Error checking harvest status:", err);
       }
-    } else if (ifAtPortal) {
-      setModal("portal");
+    } else if (ifAtExitPortal) {
+      setModal("exitPortal");
+    } else if (ifAtEnterPortal) {
+      setModal("enterPortal");
     } else if (isAtMarket) {
       setModal("market");
     }
@@ -216,12 +229,25 @@ export default function Player({
       return false;
     }
   }
-  function checkIfAtPortal() {
+  function checkIfAtExitPortal() {
     if (
-      ref.current!.position.x < portalBounds.x1 &&
-      ref.current!.position.x > portalBounds.x2 &&
-      ref.current!.position.y < portalBounds.y1 &&
-      ref.current!.position.y > portalBounds.y2
+      ref.current!.position.x < exitPortalBounds.x1 &&
+      ref.current!.position.x > exitPortalBounds.x2 &&
+      ref.current!.position.y < exitPortalBounds.y1 &&
+      ref.current!.position.y > exitPortalBounds.y2
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function checkIfAtEnterPortal() {
+    if (
+      ref.current!.position.x < enterPortalBounds.x1 &&
+      ref.current!.position.x > enterPortalBounds.x2 &&
+      ref.current!.position.y < enterPortalBounds.y1 &&
+      ref.current!.position.y > enterPortalBounds.y2
     ) {
       return true;
     } else {

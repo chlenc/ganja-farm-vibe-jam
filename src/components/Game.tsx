@@ -13,7 +13,6 @@ import { useStores } from "../stores";
 import Background from "./Background";
 import Camera from "./Camera";
 import Garden from "./Garden";
-import Loading from "./Loading";
 import MobileControlButtons from "./MobileControls";
 import Player from "./Player";
 import HarvestModal from "./modals/HarvestModal";
@@ -21,6 +20,7 @@ import MarketModal from "./modals/MarketModal";
 import PlantModal from "./modals/PlantModal";
 import PortalModal from "./modals/PortalModal";
 import Info from "./show/Info";
+import { goToExitPortal, returnToRefPortal } from "../utils/portals";
 
 interface GameProps {
   isMobile: boolean;
@@ -90,6 +90,7 @@ const Game = observer(function Game({ isMobile, farmCoinAssetID }: GameProps) {
     []
   );
 
+
   return (
     <Box css={styles.canvasContainer}>
       <>
@@ -156,7 +157,8 @@ const Game = observer(function Game({ isMobile, farmCoinAssetID }: GameProps) {
                 farmCoinAssetID={farmCoinAssetID}
               />
             )}
-            {modal === "portal" && <PortalModal />}
+            {modal === "exitPortal" && <PortalModal type="Exit" onPress={goToExitPortal} />}
+            {modal === "enterPortal" && <PortalModal type="Enter" onPress={returnToRefPortal} />}
           </>
         )}
       </>

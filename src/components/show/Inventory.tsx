@@ -73,7 +73,7 @@ const Inventory = observer(() => {
   return (
     <Container>
       <ItemBox>
-        <ItemImage src="images/tomato_seed_bag.png" alt="Seeds" />
+        <ItemImage src="./images/tomato_seed_bag.png" alt="Seeds" />
         <CounterWrapper>
           <Counter>
             {seeds != null && seeds > 99 ? "99+" : (seeds ?? "-")}
@@ -82,14 +82,14 @@ const Inventory = observer(() => {
       </ItemBox>
 
       <ItemBox>
-        <ItemImage src="images/tomato.png" alt="Tomatoes" />
+        <ItemImage src="./images/tomato.png" alt="Tomatoes" />
         <CounterWrapper>
           <Counter>{items > 99 ? "99+" : items}</Counter>
         </CounterWrapper>
       </ItemBox>
 
       <ItemBox>
-        <ItemImage src="images/coin.png" alt="Tomatoes" />
+        <ItemImage src="./images/coin.png" alt="Tomatoes" />
         <CounterWrapper>
           <Counter>
             {balance >= 1000
